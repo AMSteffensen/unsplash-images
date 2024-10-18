@@ -1,0 +1,9 @@
+[build]
+  functions = "netlify/functions"
+  publish = "dist" # Adjust this if your build directory is different
+
+[dev]
+  command = "npm run dev"  # Your local development server command
+  port = 8888              # Local frontend server port
+  targetPort = 5173        # Port where the frontend is running (e.g. Vite, Next.js, etc.)
+  functionsPort = 9999      # Port for Netlify functions

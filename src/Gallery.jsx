@@ -2,15 +2,20 @@ import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useGlobalContext } from "./context";
 
-const API_KEY = import.meta.env.VITE_API_KEY;
-const url = `https://api.unsplash.com/search/photos?client_id=${API_KEY}`;
+// Use different base URL for local vs production
+const BASE_URL = import.meta.env.DEV
+  ? "http://localhost:8888/.netlify/functions" // Local Netlify functions during development
+  : "/.netlify/functions"; // Production
 
 const Gallery = () => {
   const { searchTerm } = useGlobalContext();
+
   const { data, error, isLoading } = useQuery({
     queryKey: ["images", searchTerm],
     queryFn: async () => {
-      const result = await axios.get(`${url}&query=${searchTerm}`);
+      const result = await axios.get(
+        `${BASE_URL}/unsplash-proxy?query=${searchTerm}`
+      );
       return result.data;
     },
   });
@@ -28,7 +33,6 @@ const Gallery = () => {
       </section>
     );
 
-  // Check if there are results
   const results = data?.results;
   if (!results || results.length === 0) {
     return (
@@ -42,7 +46,7 @@ const Gallery = () => {
     <div>
       <h2>Gallery</h2>
       <div>
-        {results?.map((item) => {
+        {results.map((item) => {
           const url = item?.urls?.regular;
           return (
             <img
