@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
-import { useGlobalContext } from "./context";
+import { useGlobalContext } from "../context";
 
 // Use different base URL for local vs production
 const BASE_URL = import.meta.env.DEV
