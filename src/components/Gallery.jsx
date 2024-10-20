@@ -1,6 +1,53 @@
 import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 import { useGlobalContext } from "../context";
+import styled from "styled-components";
+
+export const ImageContainer = styled.section`
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 3rem auto;
+  padding: 1rem;
+  text-align: center;
+  display: grid;
+  gap: 2rem;
+
+  @media (min-width: 992px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+`;
+
+export const Title = styled.section`
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+`;
+
+export const ImageGallery = styled.div`
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: 1fr;
+  width: 100%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 1rem;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  @media (min-width: 992px) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+`;
+
+export const Image = styled.img`
+  width: 100%;
+  height: 15rem;
+  object-fit: cover;
+  border-radius: var(--borderRadius);
+  box-shadow: var(--shadow-1);
+`;
 
 // Use different base URL for local vs production
 const BASE_URL = import.meta.env.DEV
@@ -22,42 +69,35 @@ const Gallery = () => {
 
   if (isLoading)
     return (
-      <section className="image-container">
+      <ImageContainer>
         <h4>Loading...</h4>
-      </section>
+      </ImageContainer>
     );
   if (error)
     return (
-      <section className="image-container">
+      <ImageContainer>
         <h4>There was an error</h4>
-      </section>
+      </ImageContainer>
     );
 
   const results = data?.results;
   if (!results || results.length === 0) {
     return (
-      <section className="image-container">
+      <ImageContainer>
         <h4>No results found</h4>
-      </section>
+      </ImageContainer>
     );
   }
 
   return (
     <div>
-      <h2>Gallery</h2>
-      <div>
+      <Title>Gallery</Title>
+      <ImageGallery>
         {results.map((item) => {
           const url = item?.urls?.regular;
-          return (
-            <img
-              key={item.id}
-              src={url}
-              alt={item.alt_description}
-              className="img"
-            />
-          );
+          return <Image key={item.id} src={url} alt={item.alt_description} />;
         })}
-      </div>
+      </ImageGallery>
     </div>
   );
 };

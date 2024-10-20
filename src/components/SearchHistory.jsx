@@ -1,11 +1,10 @@
-// SearchHistory.js
 import React from "react";
 import styled from "styled-components";
 import { useGlobalContext } from "../context";
 
 const HistoryContainer = styled.div`
-  width: 150px; /* Maintain a compact width */
-  border-right: 1px solid var(--grey-300); /* Use your global grey */
+  width: 150px;
+  border-right: 1px solid var(--grey-300);
   padding: 10px;
   position: sticky;
   top: 0;
@@ -15,8 +14,8 @@ const HistoryContainer = styled.div`
 const Title = styled.h2`
   text-align: center;
   margin: 10px 0;
-  font-size: var(--small-text); /* Use your variable for consistent sizing */
-  color: var(--primary-500); /* Match the theme color */
+  font-size: var(--small-text);
+  color: var(--primary-500);
 `;
 
 const HistoryList = styled.ul`

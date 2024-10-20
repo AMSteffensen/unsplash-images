@@ -11,8 +11,8 @@ const App = () => {
   return (
     <main>
       <ThemeToggle />
-      <SearchHistory history={searchHistory} />
       <div>
+        <SearchHistory history={searchHistory} />
         <SearchForm setSearchHistory={setSearchHistory} />
         <Gallery />
       </div>

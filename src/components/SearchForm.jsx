@@ -1,4 +1,3 @@
-// SearchForm.js
 import React, { useState } from "react";
 import styled from "styled-components";
 import { useGlobalContext } from "../context";
@@ -6,23 +5,23 @@ import { useGlobalContext } from "../context";
 const Title = styled.h1`
   text-align: center;
   margin-bottom: 20px;
+  color: var(--primary-500);
 `;
 
 const Form = styled.form`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: 20px 0;
+  width: var(--view-width);
+  max-width: var(--max-width);
+  margin: 0 auto;
+  margin-top: 2rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
 `;
 
 const Input = styled.input`
-  width: 100%;
-  max-width: 400px;
-  padding: 10px;
-  border: 2px solid #ccc;
-  border-radius: 5px;
-  outline: none;
-  transition: border-color 0.3s;
+  border-color: var(--grey-300);
+  transition: var(--darkModeTransition);
+  color: var(--black);
+  border-radius: 0;
 
   &:focus {
     border-color: #007bff;
@@ -30,10 +29,9 @@ const Input = styled.input`
 `;
 
 const Button = styled.button`
-  padding: 10px 15px;
-  margin-top: 10px;
+  padding: 15px 15px;
   border: none;
-  border-radius: 5px;
+  border-radius: 0;
   background-color: #007bff;
   color: white;
   cursor: pointer;
@@ -69,7 +67,7 @@ const SearchForm = ({ setSearchHistory }) => {
   return (
     <>
       <Title>Unsplash Images</Title>
-      <Form onSubmit={handleSubmit}>
+      <Form className="search-form" onSubmit={handleSubmit}>
         <Input type="text" name="search" placeholder="Search for images..." />
         <Button type="submit">Search</Button>
       </Form>
